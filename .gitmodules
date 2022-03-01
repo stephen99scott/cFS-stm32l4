@@ -1,3 +1,6 @@
 [submodule "freertos/FreeRTOS-Kernel"]
 	path = freertos/FreeRTOS-Kernel
 	url = git@github.com:FreeRTOS/FreeRTOS-Kernel
+[submodule "bsp/STM32CubeL4"]
+	path = bsp/STM32CubeL4
+	url = git@github.com:STMicroelectronics/STM32CubeL4

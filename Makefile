@@ -1,6 +1,7 @@
 include bootloader/bootloader.mk
 include bsp/bsp.mk
 include freertos/freertos.mk
+include osal/osal.mk
 
 TOOLCHAIN = arm-none-eabi
 

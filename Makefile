@@ -14,7 +14,7 @@ OBJDUMP = $(TOOLCHAIN)-objdump
 CPU = -mcpu=cortex-m4
 FPU = -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 MCU = $(CPU) $(FPU) -mthumb 
-CFLAGS = -Wall -O2 -nostdlib -nostartfiles -ffreestanding $(MCU) $(DEBUG)
+CFLAGS = -Wall -nostdlib -nostartfiles -ffreestanding $(MCU) $(DEBUG)
 ASFLAGS = --warn --fatal-warnings $(CPU) $(DEBUG)
 LDFLAGS = --specs=nosys.specs $(MCU)
 
@@ -28,6 +28,7 @@ prep:
 
 debug: DEBUG = -g
 debug: all
+	openocd -f board/stm32l4discovery.cfg
 
 flash: build/bootloader.bin
 	openocd -f board/stm32l4discovery.cfg \

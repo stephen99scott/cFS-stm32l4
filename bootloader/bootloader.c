@@ -1,9 +1,10 @@
 #include "stm32l4xx_ll_bus.h"
-#include "stm32l4xx_ll_gpio.h"
 #include "stm32l4xx_ll_pwr.h"
 #include "stm32l4xx_ll_rcc.h"
 #include "stm32l4xx_ll_system.h"
 #include "stm32l4xx_ll_utils.h"
+
+#include "led.h"
 
 static void sysclk_init(void)
 {
@@ -50,30 +51,22 @@ int main(void)
 {
   bringup();
 
-  LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOE);
+  led_init();
 
-  LL_GPIO_InitTypeDef config = { 0 };
+  led_set(LED_GREEN, LED_ON);
+  led_set(LED_RED, LED_ON);
+  for(int i=0;i<2000000;i++);
+  led_set(LED_GREEN, LED_OFF);
 
-  config.Pin = LL_GPIO_PIN_8;
-  config.Mode = LL_GPIO_MODE_OUTPUT;
-  config.Speed = LL_GPIO_SPEED_FREQ_LOW;
-  config.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
-  config.Pull = LL_GPIO_PULL_UP;
+  while (1)
+  {
+    for(int i=0;i<2000000;i++);
+    led_toggle(LED_RED);
 
-  LL_GPIO_Init(GPIOE, &config);
+    for(int i=0;i<1000000;i++);
+    led_toggle(LED_GREEN);
+  }
 
-  LL_GPIO_SetOutputPin(GPIOE, LL_GPIO_PIN_8);
-
-
-
-  // MX_GPIO_Init();
-  // MX_USART2_UART_Init();
-
-  // HAL_GPIO_WritePin(LD_G_GPIO_Port, LD_G_Pin, GPIO_PIN_SET);
-  // while (1)
-  // {
-
-  // }
   return 0;
 }
 

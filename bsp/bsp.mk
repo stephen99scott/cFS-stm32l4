@@ -5,7 +5,8 @@ HAL_DIR = $(DRIVERS_DIR)/STM32L4xx_HAL_Driver
 CMSIS_DIR = $(DRIVERS_DIR)/CMSIS
 DEVICE_DIR = $(CMSIS_DIR)/Device/ST/STM32L4xx
 
-BSP_INC =   -I$(HAL_DIR)/Inc \
+BSP_INC = 	-I$(BSP_DIR) \
+			-I$(HAL_DIR)/Inc \
 			-I$(CMSIS_DIR)/Include \
 			-I$(DEVICE_DIR)/Include
 
@@ -15,7 +16,9 @@ HAL_SRC = \
 	$(HAL_DIR)/Src/stm32l4xx_ll_gpio.c \
 	$(HAL_DIR)/Src/stm32l4xx_ll_utils.c
 
-BSP_SRC =  $(BSP_DIR)/system_stm32l4xx.c $(HAL_SRC)
+BSP_SRC =   $(HAL_SRC) \
+			$(BSP_DIR)/system_stm32l4xx.c \
+			$(BSP_DIR)/led.c
 
 BSP_OBJS = $(notdir $(BSP_SRC:%.c=%.o))
 
